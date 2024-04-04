@@ -10,13 +10,17 @@ function App() {
     setNotes((prevNotes) => [...prevNotes, newNote]);
   };
 
+  const handleDeleteNote = (id) => {
+    setNotes((prevNotes) => prevNotes.filter((n) => n.id !== id));
+  };
+
   return (
     <div className="container">
       <h1 className="note-header">دفتر یادداشت</h1>
       <div className="note-app">
         <AddNewNote onAddNote={handleAddNote} />
         <div className="note-container">
-          <NoteList notes={notes} />
+          <NoteList notes={notes} onDelete={handleDeleteNote} />
         </div>
       </div>
     </div>

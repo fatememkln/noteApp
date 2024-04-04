@@ -1,8 +1,10 @@
-function noteList({ notes }) {
+import { TrashIcon } from "@heroicons/react/24/solid";
+
+function noteList({ notes, onDelete }) {
   return (
     <div className="note-list">
       {notes.map((note) => (
-        <NoteItem key={note.id} note={note} />
+        <NoteItem key={note.id} note={note} onDelete={onDelete} />
       ))}
     </div>
   );
@@ -10,7 +12,7 @@ function noteList({ notes }) {
 
 export default noteList;
 
-function NoteItem({ note }) {
+function NoteItem({ note, onDelete }) {
   const options = {
     year: "numeric",
     month: "long",
@@ -24,7 +26,9 @@ function NoteItem({ note }) {
           <p className="desc">{note.description}</p>
         </div>
         <div className="actions">
-          <button>*</button>
+          <button>
+            <TrashIcon className="trash" onClick={() => onDelete(note.id)} />
+          </button>
           <input type="checkbox" name="" id="" />
         </div>
       </div>
