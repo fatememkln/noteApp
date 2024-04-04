@@ -1,10 +1,15 @@
 import { TrashIcon } from "@heroicons/react/24/solid";
 
-function noteList({ notes, onDelete }) {
+function noteList({ notes, onDelete, onCompleted }) {
   return (
     <div className="note-list">
       {notes.map((note) => (
-        <NoteItem key={note.id} note={note} onDelete={onDelete} />
+        <NoteItem
+          key={note.id}
+          note={note}
+          onDelete={onDelete}
+          onCompleted={onCompleted}
+        />
       ))}
     </div>
   );
@@ -12,14 +17,14 @@ function noteList({ notes, onDelete }) {
 
 export default noteList;
 
-function NoteItem({ note, onDelete }) {
+function NoteItem({ note, onDelete, onCompleted }) {
   const options = {
     year: "numeric",
     month: "long",
     day: "numeric",
   };
   return (
-    <div className="note-item">
+    <div className={`note-item ${note.completed ? "completed" : ""}`}>
       <div className="note-item__header">
         <div>
           <p className="title">{note.title}</p>
@@ -29,7 +34,14 @@ function NoteItem({ note, onDelete }) {
           <button>
             <TrashIcon className="trash" onClick={() => onDelete(note.id)} />
           </button>
-          <input type="checkbox" name="" id="" />
+          <input
+            type="checkbox"
+            name="note.id"
+            id="note.id"
+            value={note.id}
+            checked={note.completed}
+            onChange={onCompleted}
+          />
         </div>
       </div>
       <div className="note-item__footer">
