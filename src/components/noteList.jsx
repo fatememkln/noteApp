@@ -1,9 +1,22 @@
 import { TrashIcon } from "@heroicons/react/24/solid";
 
-function noteList({ notes, onDelete, onCompleted }) {
+function noteList({ notes, onDelete, onCompleted, sortBy }) {
+  let sortedNotes = notes;
+  if (sortBy === "earliest")
+    sortedNotes = [...notes].sort(
+      (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+    );
+  if (sortBy === "latest")
+    sortedNotes = [...notes].sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    );
+  if (sortBy === "comoleted")
+    sortedNotes = [...notes].sort(
+      (a, b) => Number(a.completed) - Number(b.completed)
+    );
   return (
     <div className="note-list">
-      {notes.map((note) => (
+      {sortedNotes.map((note) => (
         <NoteItem
           key={note.id}
           note={note}
