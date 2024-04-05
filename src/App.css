@@ -13,6 +13,7 @@
   margin-bottom: 3rem;
   border-bottom: 1px solid var(--text-400);
 }
+
 @media screen and (max-width: 1024px) {
   .note-header {
     display: flex;
@@ -84,7 +85,43 @@
   justify-content: space-between;
   padding-bottom: 0.3rem;
   margin-bottom: 0.3rem;
+}
+.note-item__content {
+  transition: all 0.3s ease-in-out;
+  max-height: 0px;
+  opacity: 0;
+  overflow: hidden;
+  color: #374151;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  padding: 0 1rem;
+}
+
+.note-item__desc {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.3rem;
+  margin-bottom: 0.3rem;
   border-bottom: 1px solid var(--text-100);
+}
+
+.note-item.accordion__expanded .note-item__content {
+  padding: 1rem;
+  opacity: 1;
+  max-height: 100vh;
+  transition: all 0.2s ease-in-out;
+}
+
+.accordion-item__chevron {
+  width: 1.2rem;
+  height: 1.2rem;
+  transition: all 0.3s ease-out;
+  rotate: 0deg;
+}
+
+.note-item.accordion__expanded .accordion-item__chevron {
+  rotate: 180deg;
 }
 
 .note-item.completed .title {
@@ -104,20 +141,20 @@
   text-align: right;
 }
 
-.note-item__header .desc {
+.note-item__desc .desc {
   color: var(--text-400);
   margin-bottom: 0.5rem;
   font-weight: 300;
   text-align: right;
 }
 
-.note-item__header .actions {
+.note-item__desc .actions {
   display: flex;
   gap: 1.5rem;
   align-items: center;
 }
 
-.note-item__header .trash {
+.note-item__desc .trash {
   width: 1.5rem;
   height: 1.5rem;
   color: var(--rose-500);
