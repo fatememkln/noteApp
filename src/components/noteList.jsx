@@ -1,7 +1,9 @@
-import Accordion from "./accordion";
+import { useNotes } from "../context/NotesContext";
+import Accordion from "./Accordion";
 import { useState } from "react";
 
-function NoteList({ notes, onDelete, onCompleted, sortBy }) {
+function NoteList({ sortBy }) {
+  const notes = useNotes();
   const [open, setOpen] = useState(null);
   let sortedNotes = notes;
   if (sortBy === "earliest")
@@ -23,8 +25,6 @@ function NoteList({ notes, onDelete, onCompleted, sortBy }) {
         <Accordion
           key={note.id}
           note={note}
-          onDelete={onDelete}
-          onCompleted={onCompleted}
           setOpen={setOpen}
           open={open}
         />

@@ -1,7 +1,9 @@
 import { TrashIcon } from "@heroicons/react/24/solid";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import { useDispatchNotes } from "../context/NotesContext";
 
-function Accordion({ note, onDelete, onCompleted, setOpen, open }) {
+function Accordion({ note, setOpen, open }) {
+  const dispatch = useDispatchNotes();
   const options = {
     year: "numeric",
     month: "long",
@@ -26,7 +28,10 @@ function Accordion({ note, onDelete, onCompleted, setOpen, open }) {
           <p className="desc">{note.description}</p>
           <div className="actions">
             <button>
-              <TrashIcon className="trash" onClick={() => onDelete(note.id)} />
+              <TrashIcon
+                className="trash"
+                onClick={() => dispatch({ type: "delete", payload: note.id })}
+              />
             </button>
             <input
               type="checkbox"
@@ -34,7 +39,10 @@ function Accordion({ note, onDelete, onCompleted, setOpen, open }) {
               id="note.id"
               value={note.id}
               checked={note.completed}
-              onChange={onCompleted}
+              onChange={(e) => {
+                const noteId = Number(e.target.value);
+                dispatch({ type: "completed", payload: noteId });
+              }}
             />
           </div>
         </div>
