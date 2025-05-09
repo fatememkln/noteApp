@@ -3,6 +3,7 @@ import Accordion from "./Accordion";
 import { useState } from "react";
 
 function NoteList({ sortBy }) {
+  
   const notes = useNotes();
   const [open, setOpen] = useState(null);
   let sortedNotes = notes;

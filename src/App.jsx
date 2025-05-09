@@ -6,8 +6,6 @@ import NoteHeader from "./components/NoteHeader";
 import { NotesProvider } from "./context/NotesContext";
 import NoteStatus from "./components/noteStatus";
 
-
-
 function App() {
   const [sortBy, setSortBy] = useState("latest");
 
